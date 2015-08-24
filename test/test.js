@@ -207,6 +207,22 @@ describe('.validate', function () {
             bowerJson.validate(json);
         }).to.throwException();
     });
+    it('should validate the name starts with lower- or uppercase with strictNames set to false', function () {
+        var json = { name: 'Grunt' };
+        expect(function () {
+            bowerJson.validate(json, {
+                strictNames: false
+            });
+        }).to.not.throwException();
+    });
+    it('should validate the name starts with lower- or uppercase with strictNames set to false', function () {
+        var json = { name: '.grunt' };
+        expect(function () {
+            bowerJson.validate(json, {
+                strictNames: false
+            });
+        }).to.throwException();
+    });
     it('should validate the name ends with lowercase', function () {
         var json = { name: 'grunT' };
         expect(function () {
@@ -219,11 +235,53 @@ describe('.validate', function () {
             bowerJson.validate(json);
         }).to.throwException();
     });
+    it('should validate name ends with lower- or uppercase with strictNames set to false', function () {
+        var json = { name: 'grunt' };
+        expect(function () {
+            bowerJson.validate(json, {
+                strictNames: false
+            });
+        }).to.not.throwException();
+    });
+    it('should validate name ends with lower- or uppercase with strictNames set to false', function () {
+        var json = { name: 'grunT' };
+        expect(function () {
+            bowerJson.validate(json, {
+                strictNames: false
+            });
+        }).to.not.throwException();
+    });
+    it('should validate name ends with lower- or uppercase with strictNames set to false', function () {
+        var json = { name: 'grun.' };
+        expect(function () {
+            bowerJson.validate(json, {
+                strictNames: false
+            });
+        }).to.throwException();
+    });
     it('should validate the name is valid', function () {
         var json = { name: 'gru.n-t' };
         expect(function () {
             bowerJson.validate(json);
         }).to.not.throwException();
+    });
+    it('should validate the name does not contain two consecutive dots', function () {
+        var json = { name: 'gr..unt' };
+        expect(function () {
+            bowerJson.validate(json);
+        }).to.throwException();
+    });
+    it('should validate the name does not contain two consecutive dashes', function () {
+        var json = { name: 'gr--unt' };
+        expect(function () {
+            bowerJson.validate(json);
+        }).to.throwException();
+    });
+    it('should validate the name does not contain umlauts', function () {
+        var json = { name: 'grünt' };
+        expect(function () {
+            bowerJson.validate(json);
+        }).to.throwException();
     });
     it('should validate the description length', function () {
         var json = {
