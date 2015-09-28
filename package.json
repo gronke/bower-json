@@ -23,6 +23,7 @@
     "grunt-contrib-watch": "^0.6.1",
     "grunt-simple-mocha": "^0.4.0",
     "mocha": "*",
+    "request": "^2.64.0",
     "underscore.string": "^3.0.3"
   },
   "scripts": {
